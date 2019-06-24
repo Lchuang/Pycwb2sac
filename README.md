@@ -1,5 +1,5 @@
 # Pycwb2sac
-A python version of Cwb2sac which convers CWB .D files to either SAC or Obspy Stream format<\b>
+A python version of Cwb2sac which convers CWB .D files to either SAC or Obspy Stream format <\n>
 Written by Lindsay Chuang @ June 24, 2019
 Please contact author by kanglianan@gmail.com if there is any question
 

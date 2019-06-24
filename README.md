@@ -8,4 +8,13 @@ Please contact author by kanglianan@gmail.com if there is any question
 2. Obspy  
 
 ### Before execute the code, please 
-1. Change 
+1. Modify the first line of Pycwb2sac.py and change it to where your python path is. i.e.  
+
+Change it from 
+#!/Users/anaconda/envs/obspy/bin/python
+
+to  
+#!/Linda/anaconda/envs/obspy/bin/python
+
+### Run the script by  
+

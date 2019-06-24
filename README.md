@@ -8,13 +8,18 @@ Please contact author by kanglianan@gmail.com if there is any question
 2. Obspy  
 
 ### Before execute the code, please 
-1. Modify the first line of Pycwb2sac.py and change it to where your python path is. i.e.  
+Modify the first line of Pycwb2sac.py and change it to where your python path is. i.e.  
 
 Change it from 
 #!/Users/anaconda/envs/obspy/bin/python
-
 to  
 #!/Linda/anaconda/envs/obspy/bin/python
 
-### Run the script by  
+### Run the script and input three or four(optional) parameters in this orde:  
+Pycwb2sac <Dfile> <NSTA.DAT> <output_format SAC:0, Obspy:1> <Pfile(optional)>  
+
+Note: 
+(1) NSTA.DAT in here is a fixed version from the original one.  
+(2) Pfile is optional. If given, the earthquke and station information will be wrote to headers  
+(3) All the data files in .D file will be converted regardless if the station is listed in .P file.
 

@@ -226,9 +226,9 @@ def load_p_file(p_file_content):
             if s_arrival_time <= p_arrival_time:
                 s_arrival_time = -12345
             reformat_p_file.append({"station": station, "t1": p_arrival_time, "t2": s_arrival_time, "o": evt_dic["o"]})
-
         else:
-            raise AttributeError("P file arrival time format incorrect")
+            # raise AttributeError("P file arrival time format incorrect")
+            print("P file arrival time format incorrect")
     return reformat_p_file
 
 

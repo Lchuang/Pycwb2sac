@@ -240,7 +240,7 @@ def reformat_p_file_header(p_file_header):
         hour = int(p_file_header[9:11])
         mint = int(p_file_header[11:13])
         secs = float(p_file_header[13:19])
-        time = UTCDateTime(year, mont, dayt, hour, mint, secs)
+        time = UTCDateTime(year, mont, dayt) + hour * 3600 + mint * 60 + secs
         evla = float(p_file_header[19:21]) + float(p_file_header[21:26]) / 60
         evlo = float(p_file_header[26:29]) + float(p_file_header[29:34]) / 60
         evdp = float(p_file_header[34:40])
@@ -258,7 +258,7 @@ def reformat_p_file_header(p_file_header):
         hour = int(p_file_header[7:9])
         mint = int(p_file_header[9:11])
         secs = float(p_file_header[11:17])
-        time = UTCDateTime(year, mont, dayt, hour, mint, secs)
+        time = UTCDateTime(year, mont, dayt) + hour * 3600 + mint * 60 + secs
         evla = float(p_file_header[17:19]) + float(p_file_header[19:24]) / 60
         evlo = float(p_file_header[24:27]) + float(p_file_header[27:32]) / 60
         evdp = float(p_file_header[32:38])

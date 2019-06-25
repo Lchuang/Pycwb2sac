@@ -52,30 +52,39 @@ def load_station_file(station_info_file):
         Station_lats = int(whole_list[i][4:6]) + float(whole_list[i][6:11])/60
         Station_lons = int(whole_list[i][12:15]) + float(whole_list[i][15:20]) / 60
         Station_elev = float(np.char.strip(whole_list[i][21:27]))
-        Station_begt = fix_station_op_time(str(whole_list[i][66:72]))
-        Station_endt = fix_station_op_time(str(whole_list[i][73:79]))
+        Station_begt = fix_station_op_time(str(whole_list[i][66:72]), 'b')
+        Station_endt = fix_station_op_time(str(whole_list[i][73:79]), 'e')
         whole_list_reformat.append({"station": f'{Station_name:s}', "stationid": f'{Station_indx:d}',
                                      "stla": f'{Station_lats:.4f}', "stlo": f'{Station_lons:.4f}',
                                      "stel": f'{Station_elev:.2f}', "stbt": Station_begt, "stet": Station_endt})
     return whole_list_reformat
 
 
-def fix_station_op_time(station_be_time):
+def fix_station_op_time(station_be_time, be):
     year = int(station_be_time[0:2])
     mont = int(station_be_time[2:4])
     dayt = int(station_be_time[4:6])
+    if be == 'e':
+        hh = 23
+        mm = 59
+        ss = 59
+    elif be == 'b':
+        hh = 0
+        mm = 0
+        ss = 0
+    # ---- fix year mon day
     if year == 0 and mont == 0 and dayt == 0:
-        time = UTCDateTime(1900, 1, 1)
+        time = UTCDateTime(1900, 1, 1, hh, mm, ss)
     elif year == 99 and mont == 24 and dayt == 31:
         year = year + 2000
-        time = UTCDateTime(year, 12, 31)
+        time = UTCDateTime(year, 12, 31, hh, mm, ss)
     elif mont > 12:
         year = year + 2000
         mont = mont - 12
-        time = UTCDateTime(year, mont, dayt)
+        time = UTCDateTime(year, mont, dayt, hh, mm, ss)
     elif year >= 60:
         year = year + 1900
-        time = UTCDateTime(year, mont, dayt)
+        time = UTCDateTime(year, mont, dayt, hh, mm, ss)
     else:
         raise AttributeError("Please check station operation time format")
     return time
@@ -132,8 +141,8 @@ def map_blocks_header(whole_list_reformat, data_block_headers):
     starttime = data_block_headers["starttime"]
     instrument_type = data_block_headers["instrument_type"]
     list_of_single_station = list(filter(lambda staid: staid['stationid'] == station_id, whole_list_reformat))
-    list_gt_evt_time = list(filter(lambda stabt: stabt['stbt'] <= event_time, list_of_single_station))
-    list_lt_evt_time = list(filter(lambda stabt: stabt['stet'] >= event_time, list_gt_evt_time))
+    list_lt_evt_time = [element for element in list_of_single_station if
+                        element['stet'] > event_time and element['stbt'] <= event_time ]
     if len(list_lt_evt_time) != 1:
         raise AttributeError("station operational date ambiguity")
     else:

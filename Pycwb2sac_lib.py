@@ -193,6 +193,7 @@ def add_arrival_to_sac_trace(sac_trace, reformat_p_file):
         sac_trace.evla = reformat_p_file[0]["evla"]
         sac_trace.evlo = reformat_p_file[0]["evlo"]
         sac_trace.evdp = reformat_p_file[0]["evdp"]
+        sac_trace.mag = reformat_p_file[0]["mag"]
     sac_trace.iztype = "io"
     return sac_trace
 
@@ -208,6 +209,7 @@ def add_arrival_to_obspy_trace(obspy_trace, reformat_p_file):
         obspy_trace.stats.evla = reformat_p_file[0]["evla"]
         obspy_trace.stats.evlo = reformat_p_file[0]["evlo"]
         obspy_trace.stats.evdp = reformat_p_file[0]["evdp"]
+        obspy_trace.stats.evmag = reformat_p_file[0]["mag"]
     return Stream(traces=obspy_trace)
 
 
@@ -225,7 +227,8 @@ def load_p_file(p_file_content):
                              evt_dic["o"].microsecond/1e6 + float(p_file_list[i][39:45]) + int(p_file_list[i][21:23])*60
             if s_arrival_time <= p_arrival_time:
                 s_arrival_time = -12345
-            reformat_p_file.append({"station": station, "t1": p_arrival_time, "t2": s_arrival_time, "o": evt_dic["o"]})
+            reformat_p_file.append({"station": station, "t1": p_arrival_time, "t2": s_arrival_time, "o": evt_dic["o"],
+                                    "mag": evt_dic["mag"]})
         else:
             # raise AttributeError("P file arrival time format incorrect")
             print("P file arrival time format incorrect")

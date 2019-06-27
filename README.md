@@ -18,10 +18,14 @@ to
 ### Run the script and input three or four(optional) parameters in this order:  
 Pycwb2sac <Dfile> <NSTA.DAT> <output_format SAC:0, Obspy:1> <Pfile(optional)>   
 
-$ ./Pycwb2sac 13010557.d05 NSTA.DAT 0 13010557.p05
+$ ./Pycwb2sac.py 13010557.d05 NSTA.DAT 0 13010557.p05
 
 Note:   
 (1) NSTA.DAT in here is a fixed version from the original one.  
 (2) Pfile is optional. If given, the earthquke and station information will be wrote to headers  
 (3) All the data files in .D file will be converted regardless if the station is listed in .P file.
 
+### Converting Obspy .pk file to SAC file
+To further convert .pk file to individual SAC files, please run the script Obspy2SAC.py
+
+$ ./Obspy2SAC.py 1991-01-01T01:19:46.930000Z_1991-01-01T01:26:02.760000Z.pk 

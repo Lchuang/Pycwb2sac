@@ -209,7 +209,7 @@ def add_arrival_to_obspy_trace(obspy_trace, reformat_p_file):
         obspy_trace.stats.evla = reformat_p_file[0]["evla"]
         obspy_trace.stats.evlo = reformat_p_file[0]["evlo"]
         obspy_trace.stats.evdp = reformat_p_file[0]["evdp"]
-        obspy_trace.stats.evmag = reformat_p_file[0]["mag"]
+        obspy_trace.stats.mag = reformat_p_file[0]["mag"]
     return Stream(traces=obspy_trace)
 
 

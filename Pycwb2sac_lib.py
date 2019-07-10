@@ -1,3 +1,4 @@
+
 import numpy as np
 from obspy.core import Trace, Stats, UTCDateTime
 
@@ -187,13 +188,13 @@ def add_arrival_to_sac_trace(sac_trace, reformat_p_file):
     old_reference_time = sac_trace.reftime
     arrival = list(filter(lambda sta: sta['station'] == station, reformat_p_file))
     sac_trace.o = reformat_p_file[0]["o"]
+    sac_trace.evla = reformat_p_file[0]["evla"]
+    sac_trace.evlo = reformat_p_file[0]["evlo"]
+    sac_trace.evdp = reformat_p_file[0]["evdp"]
+    sac_trace.mag = reformat_p_file[0]["mag"]
     if arrival:
         sac_trace.t1 = arrival[0]["t1"]
         sac_trace.t2 = arrival[0]["t2"]
-        sac_trace.evla = reformat_p_file[0]["evla"]
-        sac_trace.evlo = reformat_p_file[0]["evlo"]
-        sac_trace.evdp = reformat_p_file[0]["evdp"]
-        sac_trace.mag = reformat_p_file[0]["mag"]
     sac_trace.iztype = "io"
     return sac_trace
 
@@ -203,13 +204,13 @@ def add_arrival_to_obspy_trace(obspy_trace, reformat_p_file):
     station = obspy_trace.stats.station
     arrival = list(filter(lambda sta: sta['station'] == station, reformat_p_file))
     obspy_trace.stats.o = reformat_p_file[0]["o"]
+    obspy_trace.stats.evla = reformat_p_file[0]["evla"]
+    obspy_trace.stats.evlo = reformat_p_file[0]["evlo"]
+    obspy_trace.stats.evdp = reformat_p_file[0]["evdp"]
+    obspy_trace.stats.mag = reformat_p_file[0]["mag"]
     if arrival:
         obspy_trace.stats.t1 = arrival[0]["t1"]
         obspy_trace.stats.t2 = arrival[0]["t2"]
-        obspy_trace.stats.evla = reformat_p_file[0]["evla"]
-        obspy_trace.stats.evlo = reformat_p_file[0]["evlo"]
-        obspy_trace.stats.evdp = reformat_p_file[0]["evdp"]
-        obspy_trace.stats.mag = reformat_p_file[0]["mag"]
     return Stream(traces=obspy_trace)
 
 

@@ -1,4 +1,4 @@
-#!/Users/lindsaychuang/miniconda3/envs/obspy/bin/python
+#!/home/lchuang/anaconda/envs/obspy/bin/python
 # This python script convert obspy pickle files to single SAC files
 from obspy import read
 import sys

@@ -1,5 +1,4 @@
-#!/Users/lindsaychuang/miniconda3/envs/obspy/bin/python
-
+#!/home/lchuang/anaconda/envs/obspy/bin/python
 import sys
 from Pycwb2sac_lib import *
 from obspy.core import Stream
